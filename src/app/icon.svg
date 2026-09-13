@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="neuroGrad" x1="6" y1="32" x2="58" y2="32" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0284C7" />
+      <stop offset="35%" stop-color="#10B981" />
+      <stop offset="68%" stop-color="#6366F1" />
+      <stop offset="100%" stop-color="#EC4899" />
+    </linearGradient>
+    <filter id="softGlow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#0284C7" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+  
+  <!-- Subtle dark contrast backdrop for tab visibility in dark & light browser chrome -->
+  <rect width="64" height="64" rx="16" fill="#0B132B" />
+  
+  <!-- Modern Neurodiversity Infinity Circuit Loop -->
+  <path
+    d="M 21 22 C 13.5 22 8 26.5 8 32 C 8 37.5 13.5 42 21 42 C 28 42 32.5 35.5 36.5 31.5 C 40.5 27.5 45 22 51 22 C 58.5 22 60 26.5 60 32 C 60 37.5 58.5 42 51 42 C 45 42 40.5 36.5 36.5 32.5 C 32.5 28.5 28 22 21 22 Z"
+    fill="none"
+    stroke="url(#neuroGrad)"
+    stroke-width="5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    filter="url(#softGlow)"
+  />
+  
+  <!-- Assistive Technology Circuit Nodes -->
+  <circle cx="16" cy="24" r="2" fill="#38BDF8" opacity="0.9" />
+  <circle cx="48" cy="40" r="2" fill="#F472B6" opacity="0.9" />
+  
+  <!-- Central Tech Connection Intersection -->
+  <circle cx="34" cy="32" r="3.2" fill="#FFFFFF" stroke="#6366F1" stroke-width="1.8" />
+  <circle cx="34" cy="32" r="1.2" fill="#0B132B" />
+</svg>

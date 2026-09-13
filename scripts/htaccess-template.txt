@@ -1,0 +1,82 @@
+# ----------------------------------------------------------------------
+# Apache .htaccess configuration for Tech4Neurodivergent (cPanel public_html)
+# ----------------------------------------------------------------------
+
+RewriteEngine On
+RewriteBase /
+
+# 1. Force HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# 2. Redirect Legacy Resource URLs to Guides (301 Permanent Redirects)
+RewriteRule ^resources/what-does-neurodivergent-mean/?$ /guides/what-does-neurodivergent-mean [R=301,L]
+RewriteRule ^what-does-neurodivergent-mean/?$ /guides/what-does-neurodivergent-mean [R=301,L]
+
+RewriteRule ^resources/assistive-technology-in-special-education/?$ /guides/assistive-technology-in-special-education [R=301,L]
+RewriteRule ^assistive-technology-in-special-education/?$ /guides/assistive-technology-in-special-education [R=301,L]
+
+RewriteRule ^resources/low-tech-vs-high-tech-assistive-technology/?$ /guides/low-tech-vs-high-tech-assistive-technology [R=301,L]
+RewriteRule ^low-tech-vs-high-tech-assistive-technology/?$ /guides/low-tech-vs-high-tech-assistive-technology [R=301,L]
+
+RewriteRule ^resources/visual-structure-and-task-analysis-autism/?$ /guides/visual-structure-and-task-analysis-autism [R=301,L]
+RewriteRule ^visual-structure-and-task-analysis-autism/?$ /guides/visual-structure-and-task-analysis-autism [R=301,L]
+
+RewriteRule ^resources/interoception-and-alexithymia-autism/?$ /guides/interoception-and-alexithymia-autism [R=301,L]
+RewriteRule ^interoception-and-alexithymia-autism/?$ /guides/interoception-and-alexithymia-autism [R=301,L]
+
+RewriteRule ^resources/aac-fitzgerald-key-color-coding/?$ /guides/aac-fitzgerald-key-color-coding [R=301,L]
+RewriteRule ^aac-fitzgerald-key-color-coding/?$ /guides/aac-fitzgerald-key-color-coding [R=301,L]
+
+RewriteRule ^resources/assistive-tech-for-down-syndrome/?$ /guides/assistive-tech-for-down-syndrome [R=301,L]
+RewriteRule ^assistive-tech-for-down-syndrome/?$ /guides/assistive-tech-for-down-syndrome [R=301,L]
+
+RewriteRule ^resources/cognitive-accessibility-digital-flashcards/?$ /guides/cognitive-accessibility-digital-flashcards [R=301,L]
+RewriteRule ^cognitive-accessibility-digital-flashcards/?$ /guides/cognitive-accessibility-digital-flashcards [R=301,L]
+
+RewriteRule ^resources/adaptive-tech-for-cerebral-palsy/?$ /guides/adaptive-tech-for-cerebral-palsy [R=301,L]
+RewriteRule ^adaptive-tech-for-cerebral-palsy/?$ /guides/adaptive-tech-for-cerebral-palsy [R=301,L]
+
+RewriteRule ^resources/high-contrast-large-target-interfaces/?$ /guides/high-contrast-large-target-interfaces [R=301,L]
+RewriteRule ^high-contrast-large-target-interfaces/?$ /guides/high-contrast-large-target-interfaces [R=301,L]
+
+RewriteRule ^resources/single-tap-vs-complex-aac-dual-barriers/?$ /guides/single-tap-vs-complex-aac-dual-barriers [R=301,L]
+RewriteRule ^single-tap-vs-complex-aac-dual-barriers/?$ /guides/single-tap-vs-complex-aac-dual-barriers [R=301,L]
+
+RewriteRule ^resources/functional-academics-special-education/?$ /guides/functional-academics-special-education [R=301,L]
+RewriteRule ^functional-academics-special-education/?$ /guides/functional-academics-special-education [R=301,L]
+
+RewriteRule ^guides/functional-academics-concrete-math-literacy/?$ /guides/functional-academics-special-education [R=301,L]
+RewriteRule ^guides/visual-scaffolding-down-syndrome/?$ /guides/visual-scaffolding-auditory-memory-down-syndrome [R=301,L]
+RewriteRule ^guides/total-communication-speech-aids/?$ /guides/total-communication-mid-tech-speech-aids [R=301,L]
+
+RewriteRule ^resources/?$ /guides [R=301,L]
+
+# 3. Serve .html if file exists without extension
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.*)$ $1.html [L]
+
+# 4. Fallback for Directory/Trailing Slashes
+RewriteCond %{REQUEST_FILENAME}/index.html -f
+RewriteRule ^(.*)/$ $1/index.html [L]
+
+# 5. Fallback 404
+ErrorDocument 404 /404.html
+
+# 6. Gzip / Brotli Compression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json application/xml image/svg+xml
+</IfModule>
+
+# 7. Browser Caching
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>

@@ -1,0 +1,176 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-sensory-bg: #FDFBF7;
+  --color-sensory-surface: #F5F0E6;
+  --color-sensory-card: #FFFFFF;
+  --color-sensory-card-hover: #FAF7EE;
+  --color-sensory-border: #E8E2D5;
+  --color-sensory-border-subtle: #F0ECE1;
+  --color-sensory-text: #1E293B;
+  --color-sensory-muted: #4B5A6B;
+  --color-sensory-subtle: #6B7B8D;
+  --color-sensory-primary: #2B5763;
+  --color-sensory-primary-hover: #1E3F49;
+  --color-sensory-primary-light: #E8EFF1;
+  --color-sensory-sage: #3D6B56;
+  --color-sensory-sage-light: #EDF4F0;
+  --color-sensory-amber: #9E5819;
+  --color-sensory-amber-light: #FAF2E9;
+  --color-sensory-lavender: #5B4F7D;
+  --color-sensory-lavender-light: #F2EFF7;
+}
+
+:root {
+  --background: #FDFBF7;
+  --foreground: #1E293B;
+  --card-bg: #FFFFFF;
+  --surface-bg: #F5F0E6;
+  --border-color: #E8E2D5;
+  --text-muted: #4B5A6B;
+}
+
+.dark {
+  --background: #111821;
+  --foreground: #E2E8F0;
+  --card-bg: #1A2430;
+  --surface-bg: #151F2A;
+  --border-color: #273748;
+  --text-muted: #94A3B8;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  line-height: 1.68;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Sensory Dark Mode overrides for default surfaces */
+.dark body {
+  background-color: #111821;
+  color: #E2E8F0;
+}
+
+.dark header {
+  background-color: rgba(17, 24, 33, 0.95) !important;
+  border-color: #273748 !important;
+}
+
+.dark footer {
+  background-color: #151F2A !important;
+  border-color: #273748 !important;
+  color: #94A3B8 !important;
+}
+
+/* Accessible, clear focus outlines */
+:focus-visible {
+  outline: 3px solid #2B5763;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.dark :focus-visible {
+  outline-color: #5FA4B8;
+}
+
+/* Sensory-friendly text selection */
+::selection {
+  background-color: #D3E2E6;
+  color: #1E3F49;
+}
+
+.dark ::selection {
+  background-color: #22434E;
+  color: #E2E8F0;
+}
+
+/* Fitzgerald Key color standards with dark mode adaptation */
+.fitz-yellow {
+  background-color: #FEF9C3;
+  border-color: #CA8A04;
+  color: #713F12;
+}
+.dark .fitz-yellow {
+  background-color: #382E12;
+  border-color: #A16207;
+  color: #FEF08A;
+}
+
+.fitz-green {
+  background-color: #DCFCE7;
+  border-color: #16A34A;
+  color: #14532D;
+}
+.dark .fitz-green {
+  background-color: #113421;
+  border-color: #15803D;
+  color: #BBF7D0;
+}
+
+.fitz-orange {
+  background-color: #FFEDD5;
+  border-color: #EA580C;
+  color: #7C2D12;
+}
+.dark .fitz-orange {
+  background-color: #381E10;
+  border-color: #C2410C;
+  color: #FED7AA;
+}
+
+.fitz-blue {
+  background-color: #DBEAFE;
+  border-color: #2563EB;
+  color: #1E3A8A;
+}
+.dark .fitz-blue {
+  background-color: #132742;
+  border-color: #1D4ED8;
+  color: #BFDBFE;
+}
+
+.fitz-purple {
+  background-color: #F3E8FF;
+  border-color: #9333EA;
+  color: #581C87;
+}
+.dark .fitz-purple {
+  background-color: #28173B;
+  border-color: #7E22CE;
+  color: #E9D5FF;
+}
+
+.fitz-pink {
+  background-color: #FCE7F3;
+  border-color: #DB2777;
+  color: #831843;
+}
+.dark .fitz-pink {
+  background-color: #381423;
+  border-color: #BE185D;
+  color: #FBCFE8;
+}
+
+.fitz-white {
+  background-color: #F8FAFC;
+  border-color: #94A3B8;
+  color: #334155;
+}
+.dark .fitz-white {
+  background-color: #1E293B;
+  border-color: #475569;
+  color: #CBD5E1;
+}
