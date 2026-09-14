@@ -1,15 +1,13 @@
 'use client';
 
 import React, { useState } from 'react';
-import Image from 'next/image';
-import { Heart, ShieldCheck, Copy, Check, QrCode, Smartphone } from 'lucide-react';
+import { Heart, Copy, Check, QrCode, ShieldCheck, Smartphone, ExternalLink, Download } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 
 export default function DonationCard() {
   const { language } = useLanguage();
   const isNepali = language === 'ne';
   const [copied, setCopied] = useState(false);
-  const [qrLoaded, setQrLoaded] = useState(true);
 
   const esewaId = '977 9841616976';
   const cleanId = '9841616976';
@@ -34,20 +32,22 @@ export default function DonationCard() {
             <h3 className="text-xl sm:text-2xl font-extrabold text-[#1E293B] dark:text-[#E2E8F0]">
               {isNepali ? 'eSewa मार्फत सहयोग गर्नुहोस्' : 'Support via eSewa (Nepal)'}
             </h3>
-            <p className="text-xs sm:text-sm text-[#5B6B7C] dark:text-[#94A3B8]">
+            <p className="text-xs sm:text-sm text-[#4B5A6B] dark:text-[#94A3B8]">
               {isNepali
-                ? 'निशुल्क सहायक प्रविधि र विशेष शिक्षा सामग्री निरन्तर राख्न योगदान गर्नुहोस्'
-                : 'Help us sustain free open-source special education tools & native voice recording'}
+                ? 'निःशुल्क नेपाली सहयोगी प्रविधि र शैक्षिक मञ्चलाई निरन्तरता दिनुहोस्'
+                : 'Direct community support to maintain free assistive technology'}
             </p>
           </div>
         </div>
-        <div className="inline-flex items-center gap-1.5 self-start sm:self-auto px-3 py-1 rounded-full text-xs font-bold bg-[#41A124]/10 dark:bg-[#41A124]/20 text-[#2D7A17] dark:text-[#52B788] border border-[#41A124]/30">
-          <span className="h-2 w-2 rounded-full bg-[#41A124] animate-pulse"></span>
-          <span>Official eSewa Gateway</span>
+
+        <div className="flex items-center gap-2">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800">
+            <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+            {isNepali ? 'सक्रिय eSewa खाता' : 'Active eSewa Gateway'}
+          </span>
         </div>
       </div>
 
-      {/* Main Donation Container */}
       <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center mb-8">
         {/* Left Side: ID & Step-by-Step Info */}
         <div className="md:col-span-7 space-y-6">
@@ -133,31 +133,39 @@ export default function DonationCard() {
             </div>
 
             {/* QR Image Display */}
-            <div className="relative aspect-square w-full rounded-xl bg-neutral-50 dark:bg-[#151F2A] border border-neutral-200 dark:border-neutral-800 flex items-center justify-center overflow-hidden p-2">
-              {qrLoaded ? (
-                <Image
-                  src="/images/support/esewa_qr.png"
-                  alt="eSewa QR Code - Tech4Neurodivergent"
-                  width={280}
-                  height={280}
-                  className="w-full h-full object-contain rounded-lg"
-                  onError={() => setQrLoaded(false)}
-                  priority
-                />
-              ) : (
-                <div className="p-4 flex flex-col items-center justify-center text-center">
-                  <QrCode className="h-16 w-16 text-emerald-600 dark:text-emerald-400 mb-2 opacity-80" />
-                  <span className="text-xs font-bold text-neutral-800 dark:text-neutral-200">
-                    {isNepali ? 'QR कोड चाँडै थपिनेछ' : 'QR Code Ready to Display'}
-                  </span>
-                  <span className="text-[10px] text-neutral-500 dark:text-neutral-400 mt-1">
-                    ID: {esewaId}
-                  </span>
-                </div>
-              )}
+            <div className="relative aspect-square w-full rounded-xl bg-white border border-neutral-200 dark:border-neutral-700 flex items-center justify-center overflow-hidden p-3 shadow-inner">
+              {/* Direct image rendering with white background to ensure QR scanners read immediately */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/support/esewa_qr.png"
+                alt="eSewa QR Code - 9841616976"
+                className="w-full h-full object-contain rounded-md"
+                loading="eager"
+              />
             </div>
 
-            <p className="mt-3 text-[11px] text-neutral-500 dark:text-neutral-400">
+            <div className="mt-3 flex items-center justify-center gap-2">
+              <a
+                href="/images/support/esewa_qr.png"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-700 dark:text-emerald-400 hover:underline"
+              >
+                <ExternalLink className="h-3 w-3" />
+                <span>{isNepali ? 'पूर्ण आकारमा हेर्नुहोस्' : 'View Full Image'}</span>
+              </a>
+              <span className="text-neutral-300 dark:text-neutral-600">•</span>
+              <a
+                href="/images/support/esewa_qr.png"
+                download="esewa_qr_tech4neurodivergent.png"
+                className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-700 dark:text-emerald-400 hover:underline"
+              >
+                <Download className="h-3 w-3" />
+                <span>{isNepali ? 'डाउनलोड गर्नुहोस्' : 'Download QR'}</span>
+              </a>
+            </div>
+
+            <p className="mt-2 text-[11px] text-neutral-500 dark:text-neutral-400">
               {isNepali
                 ? 'eSewa एप खोलेर स्क्यान गर्नुहोस्'
                 : 'Point any eSewa mobile scanner to contribute'}

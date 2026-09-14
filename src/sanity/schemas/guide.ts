@@ -230,11 +230,11 @@ export default defineType({
   },
   orderings: [
     {
-      title: 'Cluster Order',
-      name: 'clusterOrder',
+      title: 'Display Order',
+      name: 'displayOrder',
       by: [
-        { field: 'cluster.order', direction: 'asc' },
         { field: 'order', direction: 'asc' },
+        { field: 'title', direction: 'asc' },
       ],
     },
   ],

@@ -2,11 +2,43 @@ import { StructureBuilder } from 'sanity/structure';
 
 export const deskStructure = (S: StructureBuilder) =>
   S.list()
-    .title('Content Management')
+    .title('Tech4Neurodivergent Studio')
     .items([
-      // 1. Topic Clusters
+      // 1. Guides Organized by Topic Cluster (Hierarchy View)
       S.listItem()
-        .title('Topic Clusters (विषय क्षेत्रहरू)')
+        .title('Guides by Topic Cluster (क्लस्टर अनुसारका निर्देशिकाहरू)')
+        .child(
+          S.documentTypeList('guideCluster')
+            .title('Select a Topic Cluster')
+            .defaultOrdering([{ field: 'order', direction: 'asc' }])
+            .child((clusterId) =>
+              S.documentList()
+                .title('Guides in this Cluster')
+                .filter('_type == "guide" && cluster._ref == $clusterId')
+                .params({ clusterId })
+                .defaultOrdering([
+                  { field: 'isPrimary', direction: 'desc' },
+                  { field: 'order', direction: 'asc' },
+                ])
+            )
+        ),
+
+      // 2. All Educational Guides (Direct List View)
+      S.listItem()
+        .title('All Educational Guides (सबै निर्देशिकाहरू)')
+        .schemaType('guide')
+        .child(
+          S.documentTypeList('guide')
+            .title('All Guides')
+            .defaultOrdering([
+              { field: 'order', direction: 'asc' },
+              { field: 'title', direction: 'asc' },
+            ])
+        ),
+
+      // 3. Topic Clusters Management
+      S.listItem()
+        .title('Topic Clusters Settings (विषय क्षेत्रहरू)')
         .schemaType('guideCluster')
         .child(
           S.documentTypeList('guideCluster')
@@ -14,22 +46,9 @@ export const deskStructure = (S: StructureBuilder) =>
             .defaultOrdering([{ field: 'order', direction: 'asc' }])
         ),
 
-      // 2. Educational Guides
+      // 4. Supportive Web-Apps
       S.listItem()
-        .title('Educational Guides (शैक्षिक निर्देशिकाहरू)')
-        .schemaType('guide')
-        .child(
-          S.documentTypeList('guide')
-            .title('All Guides')
-            .defaultOrdering([
-              { field: 'cluster.order', direction: 'asc' },
-              { field: 'order', direction: 'asc' },
-            ])
-        ),
-
-      // 3. Supportive Web-Apps
-      S.listItem()
-        .title('Supportive Web-Apps (सहयोगी वेब-एपहरू)')
+        .title('Supportive Web-Apps (८ सहयोगी वेब-एपहरू)')
         .schemaType('supportiveWebApp')
         .child(
           S.documentTypeList('supportiveWebApp')
@@ -39,20 +58,20 @@ export const deskStructure = (S: StructureBuilder) =>
 
       S.divider(),
 
-      // 4. Site Layout & Global Settings (Singleton)
+      // 5. Site Layout & Global Settings (Singleton)
       S.listItem()
-        .title('Site Layout & Global Settings (साइट लेआउट)')
+        .title('Site Layout & Global Settings (साइट लेआउट र eSewa)')
         .schemaType('siteSettings')
         .child(
-          S.editor()
-            .title('Site Layout & Settings')
+          S.document()
+            .title('Site Layout & Global Settings')
             .schemaType('siteSettings')
             .documentId('siteSettings')
         ),
 
       S.divider(),
 
-      // 5. Blog & Research Posts
+      // 6. Blog & Research Articles
       S.listItem()
         .title('Blog & Research Articles')
         .schemaType('post')
@@ -62,15 +81,15 @@ export const deskStructure = (S: StructureBuilder) =>
             .defaultOrdering([{ field: 'publishedAt', direction: 'desc' }])
         ),
 
-      // 6. Custom Pages
+      // 7. Custom Pages
       S.listItem()
-        .title('Custom Pages (صفحات)')
+        .title('Custom Pages (कस्टम पृष्ठहरू)')
         .schemaType('page')
         .child(S.documentTypeList('page').title('Custom Pages')),
 
-      // 7. Categories & Authors
+      // 8. Categories & Authors
       S.listItem()
-        .title('Authors & Categories')
+        .title('Taxonomy (लेखक तथा वर्गहरू)')
         .child(
           S.list()
             .title('Taxonomy')
