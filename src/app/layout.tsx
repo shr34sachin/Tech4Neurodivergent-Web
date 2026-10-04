@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     default: 'Tech4Neurodivergent | Assistive Tech & Supportive Web-Apps for Autism, ADHD & Neurodiversity',
     template: '%s | Tech4Neurodivergent'
   },
-  description: 'Evidence-based, sensory-friendly assistive platform for autism, ADHD, and communication delays. 8 supportive web-apps including Fitzgerald Key AAC, Interoception, Visual Schedules, and Task Analysis.',
+  description: 'Free to use, sensory-friendly assistive platform for autism, ADHD, and communication delays. 8 supportive web-apps including Fitzgerald Key AAC, Interoception, Visual Schedules, and Task Analysis.',
   keywords: [
     'neurodivergent assistive technology',
     'autism AAC app',
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Tech4Neurodivergent | Assistive Tech & Supportive Web-Apps',
-    description: 'Evidence-based AAC and sensory regulation platform for neurodivergent minds.',
+    description: 'Free to use AAC and sensory regulation platform for neurodivergent minds.',
   },
   robots: {
     index: true,
@@ -85,7 +85,7 @@ export default function RootLayout({
     '@type': 'WebSite',
     name: 'Tech4Neurodivergent',
     url: siteUrl,
-    description: 'Accessible, sensory-friendly assistive platform providing evidence-informed educational guides and supportive web-apps for neurodivergent individuals.',
+    description: 'Accessible, sensory-friendly assistive platform providing educational guides and supportive web-apps for neurodivergent individuals.',
     inLanguage: ['en', 'ne'],
     potentialAction: {
       '@type': 'SearchAction',

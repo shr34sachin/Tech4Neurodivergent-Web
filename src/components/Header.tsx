@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTheme } from '@/context/ThemeContext';
+import AccessibilityToolbar from '@/components/AccessibilityToolbar';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -44,8 +45,8 @@ export default function Header() {
           <span className="flex h-2 w-2 rounded-full bg-[#52B788] animate-pulse" aria-hidden="true" />
           <span>
             {language === 'ne'
-              ? '१००% खुला स्रोत, निःशुल्क, र प्रमाण-आधारित सहायक प्रविधि सिकाइ केन्द्र'
-              : '100% Free, Open-Source & Evidence-Informed Special Education Platform'}
+              ? '१००% निःशुल्क प्रयोग गर्न सकिने विशेष शिक्षा सिकाइ केन्द्र'
+              : '100% Free to Use Special Education Platform'}
           </span>
         </div>
       </aside>
@@ -280,6 +281,11 @@ export default function Header() {
               </button>
             </div>
 
+            {/* Accessibility Settings Toolbar */}
+            <div className="ml-1">
+              <AccessibilityToolbar />
+            </div>
+
             {/* Sensory Theme Toggle (Dark / Light) */}
             <button
               type="button"
@@ -308,7 +314,7 @@ export default function Header() {
           </nav>
 
           {/* Mobile Action Controls */}
-          <div className="flex md:hidden items-center gap-2">
+          <div className="flex md:hidden items-center gap-1.5">
             {/* Mobile Language Toggle */}
             <div className="flex items-center rounded-lg border border-[#DCD5C5] dark:border-[#2C3E50] bg-[#FAF7EE] dark:bg-[#17222E] p-0.5 text-xs font-semibold">
               <button
@@ -330,6 +336,9 @@ export default function Header() {
                 नेपाली
               </button>
             </div>
+
+            {/* Mobile Accessibility Toolbar */}
+            <AccessibilityToolbar />
 
             {/* Mobile Theme Toggle */}
             <button

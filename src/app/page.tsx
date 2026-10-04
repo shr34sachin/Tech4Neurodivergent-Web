@@ -263,7 +263,7 @@ export default function HomePage() {
                 <span>{language === 'ne' ? 'शैक्षिक ज्ञान केन्द्र' : 'Educational Knowledge Hub'}</span>
               </div>
               <h2 id="clusters-heading" className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#1E293B] dark:text-[#E2E8F0]">
-                {language === 'ne' ? '५ मुख्य विषयगत केन्द्रहरू: प्रमाण-आधारित निर्देशिकाहरू' : 'Explore Our 5 Educational Resource Hubs'}
+                {language === 'ne' ? '५ मुख्य विषयगत केन्द्रहरू: शैक्षिक निर्देशिकाहरू' : 'Explore Our 5 Educational Resource Hubs'}
               </h2>
               <p className="mt-2 text-sm text-[#4B5A6B] dark:text-[#94A3B8] max-w-2xl leading-relaxed">
                 {language === 'ne'

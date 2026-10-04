@@ -29,8 +29,8 @@ export default function Footer() {
             </div>
             <p className="text-xs sm:text-sm text-[#5B6B7C] dark:text-[#94A3B8] leading-relaxed max-w-md">
               {language === 'ne'
-                ? 'अटिजम, डाउन सिन्ड्रोम, बौद्धिक अपाङ्गता, तथा सेरेब्रल पाल्सी भएका सिकारुहरूका लागि प्रमाण-आधारित सहायक प्रविधि, संवेग व्यवस्थापन, र सञ्चार सशक्तीकरण प्लेटफर्म।'
-                : 'Open-access, evidence-informed assistive technology platform engineered for autistic, Down syndrome, ID, and cerebral palsy learners.'}
+                ? 'अटिजम, डाउन सिन्ड्रोम, बौद्धिक अपाङ्गता, तथा सेरेब्रल पाल्सी भएका सिकारुहरूका लागि निःशुल्क सहायक प्रविधि, संवेग व्यवस्थापन, र सञ्चार सशक्तीकरण प्लेटफर्म।'
+                : 'Free-to-use assistive technology platform engineered for autistic, Down syndrome, ID, and cerebral palsy learners.'}
             </p>
             <div className="pt-2">
               <Link

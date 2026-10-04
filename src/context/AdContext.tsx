@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useEffect, useSyncExternalStore } from 'react';
+import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
 
 interface AdContextType {
   showAds: boolean;
@@ -14,53 +14,55 @@ const AdContext = createContext<AdContextType>({
   setShowAds: () => {},
 });
 
-function subscribeAds(callback: () => void) {
-  if (typeof window === 'undefined') return () => {};
-  window.addEventListener('storage', callback);
-  window.addEventListener('ads_toggle_change', callback);
-  return () => {
-    window.removeEventListener('storage', callback);
-    window.removeEventListener('ads_toggle_change', callback);
-  };
-}
-
-function getAdsSnapshot(): boolean {
-  if (typeof window === 'undefined') return false;
-  const saved = localStorage.getItem('tech4nd_show_ads');
-  if (saved !== null) {
-    return saved === 'true';
-  }
-  return process.env.NEXT_PUBLIC_SHOW_ADS === 'true';
-}
-
-function getAdsServerSnapshot(): boolean {
-  return false;
-}
-
 export function AdProvider({ children }: { children: React.ReactNode }) {
-  const showAds = useSyncExternalStore(subscribeAds, getAdsSnapshot, getAdsServerSnapshot);
+  const [showAds, setShowAdsState] = useState<boolean>(false);
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('tech4nd_show_ads');
+      if (saved !== null) {
+        setShowAdsState(saved === 'true');
+      } else {
+        setShowAdsState(process.env.NEXT_PUBLIC_SHOW_ADS === 'true');
+      }
+    } catch {
+      // Fallback
+    }
+
+    // Cross-tab synchronization
+    const handleStorage = (e: StorageEvent) => {
+      if (e.key === 'tech4nd_show_ads' && e.newValue !== null) {
+        setShowAdsState(e.newValue === 'true');
+      }
+    };
+    window.addEventListener('storage', handleStorage);
+    return () => window.removeEventListener('storage', handleStorage);
+  }, []);
+
+  const setShowAds = useCallback((val: boolean) => {
+    setShowAdsState(val);
+    try {
+      localStorage.setItem('tech4nd_show_ads', String(val));
+      window.dispatchEvent(new Event('ads_toggle_change'));
+    } catch {}
+  }, []);
+
+  const toggleAds = useCallback(() => {
+    setShowAdsState((prev) => {
+      const next = !prev;
+      try {
+        localStorage.setItem('tech4nd_show_ads', String(next));
+        window.dispatchEvent(new Event('ads_toggle_change'));
+      } catch {}
+      return next;
+    });
+  }, []);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      (window as unknown as { __toggleAds: () => void }).__toggleAds = () => {
-        const next = !getAdsSnapshot();
-        localStorage.setItem('tech4nd_show_ads', String(next));
-        window.dispatchEvent(new Event('ads_toggle_change'));
-        console.log(`[Tech4Neurodivergent] Ads toggled: ${next ? 'VISIBLE' : 'HIDDEN'}`);
-      };
+      (window as unknown as { __toggleAds: () => void }).__toggleAds = toggleAds;
     }
-  }, []);
-
-  const setShowAds = (val: boolean) => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('tech4nd_show_ads', String(val));
-      window.dispatchEvent(new Event('ads_toggle_change'));
-    }
-  };
-
-  const toggleAds = () => {
-    setShowAds(!showAds);
-  };
+  }, [toggleAds]);
 
   return (
     <AdContext.Provider value={{ showAds, toggleAds, setShowAds }}>

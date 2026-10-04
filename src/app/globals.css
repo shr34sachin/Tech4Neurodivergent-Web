@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant dark (&:where(.dark, .dark *, [data-theme="dark"], [data-theme="dark"] *));
 
 @theme {
   --color-sensory-bg: #FDFBF7;
@@ -32,7 +32,7 @@
   --text-muted: #4B5A6B;
 }
 
-.dark {
+.dark, [data-theme="dark"] {
   --background: #111821;
   --foreground: #E2E8F0;
   --card-bg: #1A2430;
@@ -45,7 +45,7 @@ html {
   scroll-behavior: smooth;
 }
 
-html.dark {
+html.dark, html[data-theme="dark"] {
   color-scheme: dark;
 }
 
@@ -59,20 +59,100 @@ body {
 }
 
 /* Sensory Dark Mode overrides for default surfaces */
-.dark body {
+.dark body, [data-theme="dark"] body {
   background-color: #111821;
   color: #E2E8F0;
 }
 
-.dark header {
+.dark header, [data-theme="dark"] header {
   background-color: rgba(17, 24, 33, 0.95) !important;
   border-color: #273748 !important;
 }
 
-.dark footer {
+.dark footer, [data-theme="dark"] footer {
   background-color: #151F2A !important;
   border-color: #273748 !important;
   color: #94A3B8 !important;
+}
+
+/* ==========================================================================
+   Accessibility Features (WCAG AAA & Neurodivergent Adaptations)
+   ========================================================================== */
+
+/* 1. Skip to Content link (Keyboard focusable) */
+.skip-to-content-link {
+  position: fixed;
+  top: -9999px;
+  left: 1rem;
+  z-index: 100;
+  background-color: #2B5763;
+  color: #FFFFFF;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+  text-decoration: underline;
+  transition: top 0.15s ease-in-out;
+}
+.skip-to-content-link:focus {
+  top: 1rem;
+  outline: 3px solid #5FA4B8;
+  outline-offset: 3px;
+}
+
+/* 2. Text Size Scaling */
+html[data-font-size="large"] {
+  font-size: 112.5%; /* ~18px base */
+}
+html[data-font-size="xlarge"] {
+  font-size: 125%; /* ~20px base */
+}
+
+/* 3. Dyslexia-Friendly Font & Line/Word Spacing */
+html[data-dyslexic="true"] body,
+html[data-dyslexic="true"] p,
+html[data-dyslexic="true"] span,
+html[data-dyslexic="true"] a,
+html[data-dyslexic="true"] button,
+html[data-dyslexic="true"] h1,
+html[data-dyslexic="true"] h2,
+html[data-dyslexic="true"] h3,
+html[data-dyslexic="true"] h4,
+html[data-dyslexic="true"] li,
+html[data-dyslexic="true"] label {
+  font-family: 'OpenDyslexic', 'Comic Sans MS', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  letter-spacing: 0.04em !important;
+  word-spacing: 0.08em !important;
+  line-height: 1.85 !important;
+}
+
+/* 4. High-Contrast Mode */
+html[data-high-contrast="true"] {
+  filter: contrast(120%);
+}
+html[data-high-contrast="true"].dark,
+html[data-high-contrast="true"][data-theme="dark"] {
+  --background: #000000 !important;
+  --foreground: #FFFFFF !important;
+  --card-bg: #0A0A0A !important;
+  --surface-bg: #000000 !important;
+  --border-color: #5FA4B8 !important;
+  --text-muted: #E2E8F0 !important;
+}
+html[data-high-contrast="true"] button,
+html[data-high-contrast="true"] a {
+  outline-width: 2px !important;
+}
+
+/* 5. Reduced Motion (Sensory Calm) */
+html[data-reduced-motion="true"] *,
+html[data-reduced-motion="true"] *::before,
+html[data-reduced-motion="true"] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
 }
 
 /* Accessible, clear focus outlines */
@@ -82,7 +162,7 @@ body {
   border-radius: 6px;
 }
 
-.dark :focus-visible {
+.dark :focus-visible, [data-theme="dark"] :focus-visible {
   outline-color: #5FA4B8;
 }
 
@@ -92,7 +172,7 @@ body {
   color: #1E3F49;
 }
 
-.dark ::selection {
+.dark ::selection, [data-theme="dark"] ::selection {
   background-color: #22434E;
   color: #E2E8F0;
 }
@@ -103,7 +183,7 @@ body {
   border-color: #CA8A04;
   color: #713F12;
 }
-.dark .fitz-yellow {
+.dark .fitz-yellow, [data-theme="dark"] .fitz-yellow {
   background-color: #382E12;
   border-color: #A16207;
   color: #FEF08A;
@@ -114,7 +194,7 @@ body {
   border-color: #16A34A;
   color: #14532D;
 }
-.dark .fitz-green {
+.dark .fitz-green, [data-theme="dark"] .fitz-green {
   background-color: #113421;
   border-color: #15803D;
   color: #BBF7D0;
@@ -125,7 +205,7 @@ body {
   border-color: #EA580C;
   color: #7C2D12;
 }
-.dark .fitz-orange {
+.dark .fitz-orange, [data-theme="dark"] .fitz-orange {
   background-color: #381E10;
   border-color: #C2410C;
   color: #FED7AA;
@@ -136,7 +216,7 @@ body {
   border-color: #2563EB;
   color: #1E3A8A;
 }
-.dark .fitz-blue {
+.dark .fitz-blue, [data-theme="dark"] .fitz-blue {
   background-color: #132742;
   border-color: #1D4ED8;
   color: #BFDBFE;
@@ -147,7 +227,7 @@ body {
   border-color: #9333EA;
   color: #581C87;
 }
-.dark .fitz-purple {
+.dark .fitz-purple, [data-theme="dark"] .fitz-purple {
   background-color: #28173B;
   border-color: #7E22CE;
   color: #E9D5FF;
@@ -158,7 +238,7 @@ body {
   border-color: #DB2777;
   color: #831843;
 }
-.dark .fitz-pink {
+.dark .fitz-pink, [data-theme="dark"] .fitz-pink {
   background-color: #381423;
   border-color: #BE185D;
   color: #FBCFE8;
@@ -169,7 +249,7 @@ body {
   border-color: #94A3B8;
   color: #334155;
 }
-.dark .fitz-white {
+.dark .fitz-white, [data-theme="dark"] .fitz-white {
   background-color: #1E293B;
   border-color: #475569;
   color: #CBD5E1;

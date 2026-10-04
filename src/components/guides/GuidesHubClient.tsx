@@ -496,14 +496,14 @@ export default function GuidesHubClient({ initialClusters, initialGuides }: Guid
 
           <h1 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-neutral-900 dark:text-white max-w-4xl leading-tight">
             {isNepali
-              ? 'प्रमाण-आधारित सहायक प्रविधि निर्देशिकाहरू'
-              : 'Evidence-Based Assistive Technology Knowledge Clusters'}
+              ? 'सहायक प्रविधि शैक्षिक निर्देशिकाहरू'
+              : 'Assistive Technology Knowledge Clusters'}
           </h1>
 
           <p className="mt-4 text-base sm:text-lg text-neutral-600 dark:text-neutral-300 max-w-3xl leading-relaxed">
             {isNepali
-              ? 'अटिजम (ASD), डाउन सिन्ड्रोम, बौद्धिक अपाङ्गता (ID), र सेरेब्रल पाल्सी (CP) का सिकारुहरूका लागि संवेदी-सुरक्षित, कम-उत्तेजना र पहुँचयोग्य प्रविधिहरूको क्लिनिकल पुस्तकालय। क्लस्टर अनुसार अध्ययन गर्नुहोस्:'
-              : 'Explore structured, evidence-based assistive technology guides organized into 5 distinct educational topic areas. Built for special educators, therapists, and caregivers supporting neurodivergent learners across all communication and motor profiles.'}
+              ? 'अटिजम (ASD), डाउन सिन्ड्रोम, बौद्धिक अपाङ्गता (ID), र सेरेब्रल पाल्सी (CP) का सिकारुहरूका लागि संवेदी-सुरक्षित, कम-उत्तेजना र पहुँचयोग्य प्रविधिहरूको शैक्षिक पुस्तकालय। क्लस्टर अनुसार अध्ययन गर्नुहोस्:'
+              : 'Explore structured assistive technology guides organized into 5 distinct educational topic areas. Built for special educators, therapists, and caregivers supporting neurodivergent learners across all communication and motor profiles.'}
           </p>
 
           {/* Interactive Cluster Filter Pills */}
